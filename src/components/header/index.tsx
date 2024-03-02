@@ -11,9 +11,11 @@ import {
     SheetContent,
     SheetTrigger,
 } from "@/components/ui/sheet"
-import { AppMenuIcon, AppUserSecretIcon } from '@/icons';
+import { AppMenuIcon } from '@/icons';
 import { Button } from '../ui/button';
 import { appName } from '@/lib/helpers';
+import Image from 'next/image';
+import { useDarkModeContext } from '@/providers/DarkModeProvider';
 
 const DarkMode = dynamic(() => import('@/components/DarkMode'));
 
@@ -27,6 +29,7 @@ const navigation = [
 
 export default function Header() {
 
+    const { mode } = useDarkModeContext();
     const router = useRouter();
     const pathname = usePathname();
     const splitLocation = pathname.split("/");
@@ -45,8 +48,7 @@ export default function Header() {
                     className={`text-sm ${className}`}
                     variant={isActive(item.pathsToCheck) ? 'default' : 'ghost'}
                 >
-                    <Link href={item.link}
-                    >
+                    <Link href={item.link}>
                         {item.label}
                     </Link>
                 </Button>
@@ -58,10 +60,19 @@ export default function Header() {
         <div className='border-b bg-primary-foreground shadow-sm sticky top-0 z-10'>
 
             <div className="px-2 md:container h-16 flex items-center justify-between">
+
+                <Image
+                    className="block sm:hidden"
+                    src={mode === 'light' ? '/dark-favicon.svg' : '/light-favicon.svg'}
+                    alt="App Logo"
+                    width={35}
+                    height={35}
+                />
+
                 <Button
                     name={appName}
                     variant="link"
-                    className='hover:no-underline p-0 font-bold text-xl tracking-wider text-primary cursor-pointer'
+                    className='hover:no-underline p-0 font-bold text-xl tracking-wider text-primary cursor-pointer hidden sm:block'
                     onClick={() => {
                         // router.push(routes.home.path);
                     }}>
@@ -76,11 +87,15 @@ export default function Header() {
 
                     <DarkMode />
 
-                    <SheetTrigger asChild>
-                        <Button name="menu" variant="outline" size="icon" className='lg:hidden visible'>
-                            <AppMenuIcon size={18} />
-                        </Button>
-                    </SheetTrigger>
+                    {
+                        navigation.length > 0 ?
+                            <SheetTrigger asChild>
+                                <Button name="menu" variant="ghost" size="icon" className='lg:hidden visible'>
+                                    <AppMenuIcon size={18} />
+                                </Button>
+                            </SheetTrigger>
+                            : ''
+                    }
 
                     <SheetContent className='w-[300px] py-6 px-4'>
                         <div className="grid gap-3 my-4">

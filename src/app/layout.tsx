@@ -58,11 +58,11 @@ export default function RootLayout({
       >
         <ProvidersTree>
           <Sheet>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-1 sm:gap-2">
 
               <Header />
 
-              <div className='container px-0 md:px-4'>
+              <div className='container px-1 md:px-4'>
                 {children}
               </div>
 
