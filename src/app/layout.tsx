@@ -6,7 +6,7 @@ import DarkModeProvider from "@/providers/DarkModeProvider";
 import { Sheet } from "@/components/ui/sheet";
 import dynamic from "next/dynamic";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { appName } from "@/lib/helpers";
+import { appName } from "@/helpers/client/utils";
 
 import "./globals.css";
 

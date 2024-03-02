@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/sheet"
 import { AppMenuIcon } from '@/icons';
 import { Button } from '../ui/button';
-import { appName } from '@/lib/helpers';
+import { appName } from '@/helpers/client/utils';
 import Image from 'next/image';
 import { useDarkModeContext } from '@/providers/DarkModeProvider';
 
