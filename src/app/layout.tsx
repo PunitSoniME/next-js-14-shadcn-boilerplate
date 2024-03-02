@@ -9,6 +9,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { appName } from "@/helpers/client/utils";
 
 import "./globals.css";
+import { ConfirmationDialogProvider } from "@/providers/ConfirmationDialogProvider";
+import { Toaster } from "@/components/ui/sonner";
 
 const Header = dynamic(() => import("@/components/header"));
 
@@ -37,17 +39,19 @@ export const metadata: Metadata = {
   ],
 };
 
-const buildProvidersTree = useProvidersTree();
-const ProvidersTree = buildProvidersTree([
-  [TooltipProvider, { delayDuration: 0 }],
-  [DarkModeProvider],
-]);
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const buildProvidersTree = useProvidersTree();
+  const ProvidersTree = buildProvidersTree([
+    [TooltipProvider, { delayDuration: 0 }],
+    [DarkModeProvider],
+    [ConfirmationDialogProvider],
+  ]);
+
   return (
     <html lang="en" id="app-id" suppressHydrationWarning>
       <body
@@ -65,6 +69,8 @@ export default function RootLayout({
               <div className='container px-1 md:px-4'>
                 {children}
               </div>
+
+              <Toaster richColors />
 
             </div>
 
