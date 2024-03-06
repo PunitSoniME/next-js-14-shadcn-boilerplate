@@ -1,16 +1,13 @@
 import type { Metadata } from "next";
-import { useProvidersTree } from 'react-helper-hooks';
 import { Inter as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";
-import DarkModeProvider from "@/providers/DarkModeProvider";
-import { Sheet } from "@/components/ui/sheet";
-import dynamic from "next/dynamic";
-import { TooltipProvider } from "@/components/ui/tooltip";
 import { appName } from "@/helpers/client/utils";
 
-import "./globals.css";
-import { ConfirmationDialogProvider } from "@/providers/ConfirmationDialogProvider";
 import { Toaster } from "@/components/ui/sonner";
+import dynamic from "next/dynamic";
+
+import { ProvidersTreeProvider } from "@/providers/ProvidersTreeProvider";
+import "./globals.css";
 
 const Header = dynamic(() => import("@/components/header"));
 
@@ -45,12 +42,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  const buildProvidersTree = useProvidersTree();
-  const ProvidersTree = buildProvidersTree([
-    [TooltipProvider, { delayDuration: 0 }],
-    [DarkModeProvider],
-    [ConfirmationDialogProvider],
-  ]);
 
   return (
     <html lang="en" id="app-id" suppressHydrationWarning>
@@ -60,22 +51,19 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        <ProvidersTree>
-          <Sheet>
-            <div className="flex flex-col gap-1 sm:gap-2">
+        <ProvidersTreeProvider>
+          <div className="flex flex-col gap-1 sm:gap-2">
 
-              <Header />
+            <Header />
 
-              <div className='container px-1 md:px-4'>
-                {children}
-              </div>
-
-              <Toaster richColors />
-
+            <div className='container px-1 md:px-4'>
+              {children}
             </div>
 
-          </Sheet>
-        </ProvidersTree>
+            <Toaster richColors />
+
+          </div>
+        </ProvidersTreeProvider>
       </body>
     </html>
   );

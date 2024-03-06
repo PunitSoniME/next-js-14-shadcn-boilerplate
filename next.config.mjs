@@ -11,7 +11,6 @@ const withPWA = withPWAInit({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    swcMinify: true,
     compiler: {
         removeConsole: !isDevelopmentEnvironment, // Remove console.log in production
     },
@@ -21,11 +20,10 @@ const nextConfig = {
     //             protocol: 'https',
     //             hostname: 'firebasestorage.googleapis.com',
     //             port: '',
-    //             // pathname: '/account123/**',
     //         }
 
     //     ],
     // }
 };
 
-export default withPWA(nextConfig);
+export default isDevelopmentEnvironment ? nextConfig : withPWA(nextConfig);

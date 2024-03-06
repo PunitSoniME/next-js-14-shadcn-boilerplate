@@ -1,6 +1,6 @@
 {
-    "name": "ByteToPixel",
-    "short_name": "ByteToPixel",
+    "name": "AppName",
+    "short_name": "AppName",
     "icons": [
         {
             "src": "/icons/android/android-launchericon-48-48.png",

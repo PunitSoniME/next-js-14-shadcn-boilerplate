@@ -9,4 +9,12 @@ export const GET = withErrorHandler(async (req: NextRequest) => {
     }
 });
 
+export const POST = withErrorHandler(async (req: NextRequest) => {
+    try {
+        return { message: "API with post is working fine" };
+    } catch (ex) {
+        throw new Error(ex);
+    }
+});
+
 export const dynamic = "force-dynamic";

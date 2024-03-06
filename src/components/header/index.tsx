@@ -13,9 +13,10 @@ import {
 } from "@/components/ui/sheet"
 import { AppMenuIcon } from '@/icons';
 import { Button } from '../ui/button';
-import { appName } from '@/helpers/client/utils';
+import { appName, postApi } from '@/helpers/client/utils';
 import Image from 'next/image';
 import { useDarkModeContext } from '@/providers/DarkModeProvider';
+import routes from '@/helpers/client/routes';
 
 const DarkMode = dynamic(() => import('@/components/DarkMode'));
 
@@ -69,15 +70,12 @@ export default function Header() {
                     height={35}
                 />
 
-                <Button
-                    name={appName}
-                    variant="link"
-                    className='hover:no-underline p-0 font-bold text-xl tracking-wider text-primary cursor-pointer hidden sm:block'
-                    onClick={() => {
-                        // router.push(routes.home.path);
-                    }}>
+                <Link
+                    href={routes.home.path}
+                    className='font-bold text-xl tracking-wider text-primary cursor-pointer hidden sm:block'
+                >
                     {appName}
-                </Button>
+                </Link>
 
                 <div className="gap-3 hidden lg:flex">
                     <NavigationLinks size="xs" />

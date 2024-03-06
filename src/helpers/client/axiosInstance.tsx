@@ -25,6 +25,24 @@ const axiosInstance = () => {
             resolve(response);
         }), (error) => {
 
+            if (error.code === 'ECONNABORTED') {
+                return new Promise((_, reject) => {
+                    reject({ type: "error", message: error?.message });
+                });
+            }
+
+            if (error.code === 'ERR_BAD_REQUEST') {
+                return new Promise((_, reject) => {
+                    reject({ type: "error", message: error?.response?.statusText });
+                })
+            }
+
+            if (error.code === 'ERR_BAD_RESPONSE') {
+                return new Promise((_, reject) => {
+                    reject({ type: "error", message: error?.response?.data });
+                })
+            }
+
             if (error.message === "Network Error") {
                 return new Promise((_, reject) => {
                     reject({ type: "error", message: "Api Not Working" });
@@ -32,11 +50,11 @@ const axiosInstance = () => {
             }
 
             //  Show original error when development environment
-            let { message } = error.response.data;
+            let { message } = error?.response?.data || {};
 
             //  Show status code message for production environment
             if (isProduction) {
-                message = error.response.statusText;
+                message = error?.response?.statusText || 'Unexpected error occured';
             }
 
             if (error.code === "ERR_BAD_REQUEST") {
