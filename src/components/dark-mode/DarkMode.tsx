@@ -1,9 +1,9 @@
 'use client'
 
 import React from 'react'
-import { Button } from './ui/button'
+import { Button } from '../ui/button'
 import { useDarkModeContext } from '@/providers/DarkModeProvider'
-import CustomTooltip from './CustomTooltip';
+import CustomTooltip from '../CustomTooltip';
 import { AppSunIcon, AppMoonIcon } from '@/icons';
 
 export default function DarkMode() {
@@ -16,7 +16,9 @@ export default function DarkMode() {
                 size='icon'
                 variant='ghost'
                 name="dark-mode"
-                onClick={toggleMode}>
+                onClick={toggleMode}
+                data-testid='dark-mode-test-id'
+            >
                 {
                     mode === 'dark'
                         ? <AppSunIcon size={20} className='text-orange-300' />

@@ -18,7 +18,7 @@ import Image from 'next/image';
 import { useDarkModeContext } from '@/providers/DarkModeProvider';
 import routes from '@/helpers/client/routes';
 
-const DarkMode = dynamic(() => import('@/components/DarkMode'));
+const DarkMode = dynamic(() => import('@/components/dark-mode/DarkMode'));
 
 const navigation = [
     // {
