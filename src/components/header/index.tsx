@@ -15,8 +15,8 @@ import { AppMenuIcon } from '@/icons';
 import { Button } from '../ui/button';
 import { appName, postApi } from '@/helpers/client/utils';
 import Image from 'next/image';
-import { useDarkModeContext } from '@/providers/DarkModeProvider';
 import routes from '@/helpers/client/routes';
+import { useTheme } from 'next-themes';
 
 const DarkMode = dynamic(() => import('@/components/dark-mode/DarkMode'));
 
@@ -30,7 +30,7 @@ const navigation = [
 
 export default function Header() {
 
-    const { mode } = useDarkModeContext();
+    const { theme } = useTheme();
     const router = useRouter();
     const pathname = usePathname();
     const splitLocation = pathname.split("/");
@@ -64,7 +64,7 @@ export default function Header() {
 
                 <Image
                     className="block sm:hidden"
-                    src={mode === 'light' ? '/dark-favicon.svg' : '/light-favicon.svg'}
+                    src={theme === 'light' ? '/dark-favicon.svg' : '/light-favicon.svg'}
                     alt="App Logo"
                     width={35}
                     height={35}
